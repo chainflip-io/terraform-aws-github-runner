@@ -16,7 +16,7 @@ variable "runner_version" {
 variable "region" {
   description = "The region to build the image in"
   type        = string
-  default     = "eu-west-1"
+  default     = "us-east-1"
 }
 
 variable "security_group_id" {
@@ -39,7 +39,7 @@ variable "instance_type" {
 
 variable "root_volume_size_gb" {
   type    = number
-  default = 8
+  default = 32
 }
 
 variable "global_tags" {
@@ -61,7 +61,7 @@ variable "snapshot_tags" {
 }
 
 source "amazon-ebs" "githubrunner" {
-  ami_name          = "github-runner-ubuntu-focal-amd64-${formatdate("YYYYMMDDhhmm", timestamp())}"
+  ami_name          = "github-self-hosted-runner-ubuntu-${formatdate("YYYYMMDDhhmm", timestamp())}"
   instance_type     = var.instance_type
   region            = var.region
   security_group_id = var.security_group_id
@@ -161,4 +161,14 @@ build {
     ]
   }
 
+  provisioner "file" {
+    source      = "../chainflip-setup.sh"
+    destination = "/tmp/chainflip-setup.sh"
+  }
+  provisioner "shell" {
+    inline = [
+      "sudo chmod +x /tmp/chainflip-setup.sh",
+      "sudo /tmp/chainflip-setup.sh",
+    ]
+  }
 }
