@@ -90,14 +90,10 @@ NIGHTLY=nightly-2021-07-05 && rustup default ${NIGHTLY} &&
     rustup component add clippy
 
 # chainflip-eth-contracts dependencies
-sudo apt-get -y install python3-testresources
-sudo apt-get -y install python3.8-venv
-sudo apt-get -y install python3-pip
-
+sudo apt-get -y install python3 python-dev python3-dev build-essential python3-testresources python3.8-venv python3-pip
 curl -sSL https://install.python-poetry.org | python3 -
 
-curl -fsSL https://deb.nodesource.com/setup_14.x | sh - &&
-    apt-get install -y nodejs
+sudo curl -fsSL https://deb.nodesource.com/setup_16.x | sudo sh - && sudo apt-get install -y nodejs
 npm install --global ganache-cli
 
 export PATH="$HOME/.local/bin:$PATH"
