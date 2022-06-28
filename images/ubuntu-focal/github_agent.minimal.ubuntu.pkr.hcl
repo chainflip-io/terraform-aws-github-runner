@@ -161,4 +161,15 @@ build {
       "sudo chmod +x /var/lib/cloud/scripts/per-boot/start-runner.sh",
     ]
   }
+
+  provisioner "file" {
+    source      = "../eth-contracts-setup.sh"
+    destination = "/tmp/eth-contracts-setup.sh"
+  }
+  provisioner "shell" {
+    inline = [
+      "sudo chmod +x /tmp/eth-contracts-setup.sh",
+      "sudo /tmp/eth-contracts-setup.sh",
+    ]
+  }
 }
