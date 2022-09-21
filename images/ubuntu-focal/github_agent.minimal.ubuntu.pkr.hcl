@@ -61,7 +61,7 @@ variable "snapshot_tags" {
 }
 
 source "amazon-ebs" "githubrunner" {
-  ami_name          = "github-self-hosted-runner-ubuntu-${formatdate("YYYYMMDDhhmm", timestamp())}"
+  ami_name          = "github-self-hosted-runner-ubuntu-${formatdate("YYYY-MM-DD-hhmm", timestamp())}"
   instance_type     = var.instance_type
   region            = var.region
   security_group_id = var.security_group_id
