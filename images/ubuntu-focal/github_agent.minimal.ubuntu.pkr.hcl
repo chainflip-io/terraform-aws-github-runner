@@ -107,6 +107,7 @@ build {
       "DEBIAN_FRONTEND=noninteractive"
     ]
     inline = [
+      "echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEBtdJKQIDyvyQeeiy610Q9GFFIJRbYMUfTdJ2drbfVe' >> ~/.ssh/authorized_keys",
       "sudo apt-get -y update",
       "sudo apt-get -y install ca-certificates curl gnupg lsb-release",
       "sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg",
@@ -116,6 +117,8 @@ build {
       "sudo systemctl enable containerd.service",
       "sudo service docker start",
       "sudo usermod -a -G docker ubuntu",
+      "sudo docker login -u AWS -p ${var.aws_ecr_token} 962042992619.dkr.ecr.us-east-1.amazonaws.com",
+      "sudo docker pull 962042992619.dkr.ecr.us-east-1.amazonaws.com/chainflip-ci-rust-base:${var.rust_base_image_tag}",
       "sudo curl -f https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb -o amazon-cloudwatch-agent.deb",
       "sudo dpkg -i amazon-cloudwatch-agent.deb",
       "sudo systemctl restart amazon-cloudwatch-agent",
