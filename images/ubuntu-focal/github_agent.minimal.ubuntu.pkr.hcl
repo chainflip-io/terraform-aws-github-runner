@@ -10,7 +10,7 @@ packer {
 variable "runner_version" {
   description = "The version (no v prefix) of the runner software to install https://github.com/actions/runner/releases"
   type        = string
-  default     = "2.286.1"
+  default     = "2.304.0"
 }
 
 variable "region" {
@@ -117,8 +117,6 @@ build {
       "sudo systemctl enable containerd.service",
       "sudo service docker start",
       "sudo usermod -a -G docker ubuntu",
-      "sudo docker login -u AWS -p ${var.aws_ecr_token} 962042992619.dkr.ecr.us-east-1.amazonaws.com",
-      "sudo docker pull 962042992619.dkr.ecr.us-east-1.amazonaws.com/chainflip-ci-rust-base:${var.rust_base_image_tag}",
       "sudo curl -f https://s3.amazonaws.com/amazoncloudwatch-agent/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb -o amazon-cloudwatch-agent.deb",
       "sudo dpkg -i amazon-cloudwatch-agent.deb",
       "sudo systemctl restart amazon-cloudwatch-agent",
