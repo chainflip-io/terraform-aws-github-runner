@@ -123,8 +123,8 @@ build {
       "sudo dpkg -i amazon-cloudwatch-agent.deb",
       "sudo systemctl restart amazon-cloudwatch-agent",
       "sudo curl -f https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip",
-      "unzip awscliv2.zip",
-      "sudo ./aws/install",
+      "unzip awscliv2.zip > /dev/null",
+      "sudo ./aws/install > /dev/null",
     ]
   }
 

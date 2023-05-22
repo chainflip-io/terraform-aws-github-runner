@@ -4,6 +4,9 @@ export DEBIAN_FRONTEND=noninteractive
 
 sudo apt-get update && sudo apt-get -y upgrade
 
+sudo wget -qO /bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+sudo chmod a+x /bin/yq
+
 sudo apt-get -y install \
     cmake \
     build-essential \
@@ -21,6 +24,7 @@ sudo apt-get -y install \
     apt-transport-https \
     ca-certificates \
     unzip \
+    zip \
     git \
     jo \
     netcat \
